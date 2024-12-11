@@ -2,7 +2,10 @@ module github.com/tianxidev/gt
 
 go 1.23.3
 
-require gorm.io/gorm v1.25.12
+require (
+	golang.org/x/sys v0.5.0
+	gorm.io/gorm v1.25.12
+)
 
 require (
 	github.com/jinzhu/inflection v1.0.0 // indirect
