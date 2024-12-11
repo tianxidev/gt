@@ -1,0 +1,3 @@
+resources/*
+*_test.go
+test_*
