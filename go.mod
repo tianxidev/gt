@@ -1,4 +1,4 @@
-module github.com/Tianxidev/gt
+module github.com/tianxidev/gt
 
 go 1.23.3
 
