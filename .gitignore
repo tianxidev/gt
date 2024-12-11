@@ -1,3 +1,5 @@
 resources/*
 *_test.go
 test_*
+go.sum
+*.md5
