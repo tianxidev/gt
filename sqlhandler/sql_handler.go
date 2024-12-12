@@ -28,6 +28,10 @@ func (h *SQLHandler) LoadSQLTemplate(fileName string) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("failed to read SQL template: %w", err)
 	}
+
+	content = regexp.MustCompile(`\s+`).ReplaceAll(content, []byte(" "))
+	content = regexp.MustCompile(`\s*,\s*`).ReplaceAll(content, []byte(","))
+
 	return string(content), nil
 }
 
