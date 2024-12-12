@@ -38,11 +38,11 @@ func (h *SQLHandler) LoadSQLTemplate(fileName string) (string, error) {
 func (h *SQLHandler) ReplaceNamedVariables(sqlTemplate string, params map[string]interface{}) (string, []interface{}) {
 	placeholders := []interface{}{}
 
-	re := regexp.MustCompile(`\$\w+`)
+	re := regexp.MustCompile(`\@\w+`)
 	matches := re.FindAllString(sqlTemplate, -1)
 
 	for _, match := range matches {
-		paramName := strings.TrimPrefix(match, "$")
+		paramName := strings.TrimPrefix(match, "@")
 		if value, exists := params[paramName]; exists {
 			sqlTemplate = strings.ReplaceAll(sqlTemplate, match, "?")
 			placeholders = append(placeholders, value)
