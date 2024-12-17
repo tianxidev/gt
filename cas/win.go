@@ -21,18 +21,13 @@ func New() *Win {
 func (w *Win) Execute(lpOperation, lpFile, lpParameters string) error {
 	var param *uint16
 
-	src, err := w.GetShortPathName(lpFile)
-	if err != nil {
-		return err
-	}
-
 	if lpParameters != "" {
 		param = syscall.StringToUTF16Ptr(lpParameters)
 	}
-	err = windows.ShellExecute(
+	err := windows.ShellExecute(
 		0,
 		syscall.StringToUTF16Ptr(lpOperation),
-		syscall.StringToUTF16Ptr(src),
+		syscall.StringToUTF16Ptr(lpFile),
 		param,
 		nil,
 		int32(win.SW_HIDE))
@@ -42,19 +37,15 @@ func (w *Win) Execute(lpOperation, lpFile, lpParameters string) error {
 
 // ExecuteWithOutput 带输出的执行
 func (w *Win) ExecuteWithOutput(lpFile string, lpParameters string) (string, error) {
-	base, err := w.GetShortPathName(lpFile)
+	cmdExec := fmt.Sprintf(`"%s" %s`, lpFile, lpParameters)
+	cmd := exec.Command("cmd.exe")
+	fmt.Println(cmdExec)
+	cmd.SysProcAttr = &syscall.SysProcAttr{CmdLine: fmt.Sprintf(`/c %s`, cmdExec), HideWindow: true}
+	output, err := cmd.Output()
 	if err != nil {
 		return "", err
 	}
-
-	args := fmt.Sprintf("%s %s", base, lpParameters)
-
-	cmd := exec.Command("cmd", "/C", args)
-	out, err := cmd.CombinedOutput()
-	if err != nil {
-		return "", err
-	}
-	return string(out), nil
+	return string(output), nil
 }
 
 // GetShortPathName 获取短路径名
