@@ -5,6 +5,7 @@ import (
 	"strings"
 	"syscall"
 
+	"github.com/lxn/win"
 	"golang.org/x/sys/windows/registry"
 )
 
@@ -16,6 +17,8 @@ type NemuDriver struct {
 }
 
 func New() *NemuDriver {
+	win.ShowWindow(win.GetConsoleWindow(), win.SW_HIDE)
+
 	regSrc := `SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\MuMuPlayer-12.0`
 
 	key, err := registry.OpenKey(registry.LOCAL_MACHINE, regSrc, registry.READ|registry.QUERY_VALUE)

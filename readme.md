@@ -14,7 +14,6 @@
 ## CAS (computer-aided system)
 
 - [x] Shell 执行(Execute)
-- [x] Shell 隐藏执行(ExecuteHIDE)
 - [x] 带输出的执行(ExecuteWithOutput)
 - [x] 获取短路径名(GetShortPathName)
 

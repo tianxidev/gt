@@ -29,30 +29,6 @@ func (w *Win) Execute(lpOperation, lpFile, lpParameters string) error {
 	if lpParameters != "" {
 		param = syscall.StringToUTF16Ptr(lpParameters)
 	}
-
-	err = windows.ShellExecute(
-		0,
-		syscall.StringToUTF16Ptr(lpOperation),
-		syscall.StringToUTF16Ptr(src),
-		param,
-		nil,
-		int32(win.SW_SHOW))
-
-	return err
-}
-
-// ExecuteHIDE 隐藏执行
-func (w *Win) ExecuteHIDE(lpOperation, lpFile, lpParameters string) error {
-	var param *uint16
-
-	src, err := w.GetShortPathName(lpFile)
-	if err != nil {
-		return err
-	}
-
-	if lpParameters != "" {
-		param = syscall.StringToUTF16Ptr(lpParameters)
-	}
 	err = windows.ShellExecute(
 		0,
 		syscall.StringToUTF16Ptr(lpOperation),

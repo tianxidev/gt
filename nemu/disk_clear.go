@@ -14,7 +14,7 @@ func (n *NemuDriver) DiskClear(index string, pid int) {
 	args := []string{"-v", "MuMuPlayer-12.0-" + index, "-p", strconv.Itoa(pid), "-isBatch", "1"}
 
 	// clear disk
-	err := new(cas.Win).ExecuteHIDE("open", driver, strings.Join(args, " "))
+	err := new(cas.Win).Execute("open", driver, strings.Join(args, " "))
 	if err != nil {
 		panic(err)
 	}
