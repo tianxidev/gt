@@ -3,3 +3,4 @@ resources/*
 test_*
 go.sum
 *.md5
+compact_log.txt

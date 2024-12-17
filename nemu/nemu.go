@@ -1,11 +1,9 @@
 package nemu
 
 import (
-	"fmt"
 	"log"
 	"strings"
 	"syscall"
-	"unsafe"
 
 	"golang.org/x/sys/windows/registry"
 )
@@ -58,28 +56,4 @@ func New() *NemuDriver {
 		NemuConnect:    NemuConnect,
 		NemuDisconnect: NemuDisconnect,
 	}
-}
-
-func (n *NemuDriver) connect(index int) {
-	ptrPath := uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr(n.InstallDir)))
-	ret, _, err := n.NemuConnect.Call(ptrPath, uintptr(index))
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-	fmt.Println("connect: ", ret)
-	n.ConnectionId = int(ret)
-}
-
-func (n *NemuDriver) disconnect() {
-	ret, _, err := n.NemuDisconnect.Call(uintptr(n.ConnectionId))
-	if err != nil {
-		log.Fatal(err)
-	}
-	log.Println("disconnect", ret)
-}
-
-func (n *NemuDriver) StartDevice(index int) {
-	n.connect(index)
-
-	n.disconnect()
 }
