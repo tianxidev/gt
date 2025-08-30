@@ -1,10 +1,10 @@
 # 通用工具库 (General Tool Library)
 
-此仓库并非独立维护分支, 生产使用时请格外注意!
+此仓库并非独立维护分支, 生产使用时请格外注意版本锁定!
 
-## 商业授权与技术支持
+## 交流探讨
 
-请通过下方二维码与我联系
+通过下方二维码即可与我联系
 
 <div style='display: flex; justify-content: center; gap: 0.5rem;'>
     <img width='257' height='257' src='./images/appreciate_code.jpg'>
